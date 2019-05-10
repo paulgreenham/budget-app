@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css'
+
+class App extends Component {
+
+  render() {
+    return (
+      <div className="App">
+        <div id="main-container">
+          <div id="nav-bar">
+            <div class="nav-button" id="budgets">Budgets</div>
+            <div class="nav-button" id="bank-statements">Bank Statements</div>
+            <div class="nav-button" id="investments">Investments</div>
+            <div class="nav-button" id="taxes">Taxes</div>
+          </div>
+          <div id="content-container">
+            <div id="main-content">
+                <h1>Money Logger</h1>
+                <p>What would you like to do today?</p>
+            </div>
+          </div>
+          <div id="selections-container">
+            <div class="selection" id="add">Add budget item</div>
+            <div class="selection" id="check">Check budget</div>
+            <div class="selection" id="create">Create new budget</div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
