@@ -5,7 +5,7 @@ const moment = require('moment')
 
 const Expense = require('../models/Expense')
 
-router.get('/expenses', function (req, res) {
+router.get('/budget-items', function (req, res) {
     if(req.query.d1) {
     let startDate = moment(req.query.d1, "YYYY-MM-DD").format("LLLL")
         if(req.query.d2) {
@@ -27,7 +27,7 @@ router.get('/expenses', function (req, res) {
     }  
 })
 
-router.get('/expenses/:category', function (req, res) {
+router.get('/budget-items/:category', function (req, res) {
     let categorySelection = req.params.category
     if(req.query.total) {
         Expense.aggregate([
@@ -51,10 +51,10 @@ router.post('/new', async function (req, res) {
         category: req.body.category,
         amount: req.body.amount,
         date: (req.body.date) ? moment(req.body.date, "YYYY-MM-DD").format("LLLL") : moment().format("LLLL"),
-        description: req.body.description
+        description: req.body.description,
+        type: req.body.type
     })
     await newExpense.save()
-    console.log(`Spent ${newExpense.amount} on ${newExpense.name} on ${newExpense.date}`)
     res.end()
 })
 
@@ -64,7 +64,7 @@ router.put('/update/:category1/:category2', function (req, res) {
         {category: req.params.category2},
         {new: true},
         function (err, expense) {
-        res.send(`Expense: ${expense.name} on ${expense.date} has had category ${req.params.category1} changed to ${expense.category}`)
+        res.send(`Expense: ${expense.description} on ${expense.date} has had category ${req.params.category1} changed to ${expense.category}`)
     })
 })
 

@@ -6,7 +6,8 @@ const expenseSchema = new Schema({
     category: String,
     amount: Number,
     date: Date,
-    description: String
+    description: String,
+    type: String
 })
 
 
