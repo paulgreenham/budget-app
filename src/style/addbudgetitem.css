@@ -1,0 +1,23 @@
+#main-add-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    opacity: 0.9;
+}
+
+@media only screen and (max-width: 720px) {
+    #main-add-container {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+.add-inputs {
+    background-color: #EC8B20;
+    display: grid;
+    padding: 5vw;
+}
+
+.transaction-summary {
+    background-color: #8F0D17;
+    color: #E1CDB5;
+}

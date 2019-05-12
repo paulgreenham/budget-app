@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Transactions from './Transactions';
 
+import '../style/addbudgetitem.css'
 class AddBudgetItem extends Component {
     constructor() {
         super()
@@ -42,21 +43,23 @@ class AddBudgetItem extends Component {
 
     render(){
         return (<div id="main-add-container">
-            <div id="add-inputs">
-                <input name="category" type="text" className="category" placeholder="Enter Category" 
-                    value={this.state.category} onChange={this.getInput} />
+            <div className="add-inputs">
+                <div className="category"><input name="category" type="text" placeholder="Enter Category" 
+                    value={this.state.category} onChange={this.getInput} /></div>
 
-                <input name="amount" type="number" className="amount" placeholder="Amount"
-                    value={this.state.amount} onChange={this.getInput} />
+                <div className="amount"><input name="amount" type="number" placeholder="Amount"
+                    value={this.state.amount} onChange={this.getInput} /></div>
 
-                <input name="date" type="date" className="date" placeholder="Date (leave blank to enter today's date)"
-                    value={this.state.date} onChange={this.getInput} />
+                <div className="date"><input name="date" type="date" placeholder="Date (leave blank to enter today's date)"
+                    value={this.state.date} onChange={this.getInput} /></div>
 
-                <input name="description" type="text" className="description" placeholder="Enter description"
-                    value={this.state.description} onChange={this.getInput} />
+                <div className="description"><input name="description" type="text" placeholder="Enter description"
+                    value={this.state.description} onChange={this.getInput} /></div>
 
-                <button className="expense-button" onClick={this.expense}>Expense</button>
-                <button className="income-button" onClick={this.income}>Income</button>
+                <div className="add-buttons">
+                    <button className="expense-button" onClick={this.expense}>Expense</button>
+                    <button className="income-button" onClick={this.income}>Income</button>
+                </div>
             </div>
             <div className="transaction-summary">
                 <Transactions transactions={this.props.transactions}/>
