@@ -19,6 +19,15 @@ class AddBudgetItem extends Component {
 
     getInput = event => this.setState({ [event.target.name]: event.target.value })
 
+    resetInput = () => {
+        this.setState({
+            category: "",
+            amount: 0,
+            date: new Date(),
+            description: ""
+        })
+    }
+
     expense = () => {
         const transaction = {
             category: this.state.category,
@@ -28,6 +37,7 @@ class AddBudgetItem extends Component {
             type: "expense"
         }
         this.props.makeInput(transaction)
+        this.resetInput()
     }
 
     income = () => {
@@ -39,6 +49,7 @@ class AddBudgetItem extends Component {
             type: "income"
         }
         this.props.makeInput(transaction)
+        this.resetInput()
     }
 
     render(){
