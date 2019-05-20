@@ -1,23 +1,29 @@
 import React, { Component } from 'react'
-import Transaction from './Transaction';
+import Transaction from './Transaction'
+import { observer, inject } from 'mobx-react'
 
+import '../style/spinner.css'
+
+@inject("currentBudget")
+@observer
 class Transactions extends Component {
     constructor() {
         super()
         this.state = {
-            selectedMonth: new Date().getMonth()
+            selectedMonth: new Date().getMonth(),
+            loading: true
         }
-    }
-
-    getSelectedTransactions = () => {
-        let transactions = this.props.transactions || []
-        return transactions.filter(t => new Date(t.date).getMonth() === this.state.selectedMonth)
     }
 
     changeMonth = event => {
         this.setState({
             selectedMonth: parseInt(event.target.value)
         })
+    }
+
+    async componentDidMount() {
+        await this.props.currentBudget.updateTransactions()
+        this.setState({ loading: false })
     }
 
     selectMonth = () => {
@@ -42,11 +48,18 @@ class Transactions extends Component {
     }
 
     render(){
-        const transactions = this.getSelectedTransactions() || []
-        return (<div>
-            {this.selectMonth()}
-            {transactions.map(t => <Transaction key={t._id} transaction={t}/>)}
-        </div>)
+        const transactions = this.props.currentBudget.getTransactionsByMonth(this.state.selectedMonth)
+        return (<React.Fragment> {this.state.loading ? 
+            <div className="spinner">
+                <div className="bounce1"></div>
+                <div className="bounce2"></div>
+                <div className="bounce3"></div>
+            </div> :
+            <div className="transaction-summary">
+                {this.selectMonth()}
+                {transactions.map(t => <Transaction key={t._id} transaction={t}/>)}
+            </div>}
+        </React.Fragment>)
     }
 }
 

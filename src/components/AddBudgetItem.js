@@ -1,80 +1,51 @@
 import React, { Component } from 'react'
-import Transactions from './Transactions';
+import Transactions from './Transactions'
+import { observer, inject } from 'mobx-react'
 
 import '../style/addbudgetitem.css'
+
+@inject("generalStore", "currentBudget")
+@observer
 class AddBudgetItem extends Component {
-    constructor() {
-        super()
-        this.state = {
-            category: "",
-            amount: 0,
-            date: new Date(),
-            description: ""
-        }
-    }
 
-    async componentDidMount() {
-        await this.props.updateTransactions()
-    }
+    getInput = event => this.props.generalStore.getInput(event.target.name, event.target.value)
 
-    getInput = event => this.setState({ [event.target.name]: event.target.value })
-
-    resetInput = () => {
-        this.setState({
-            category: "",
-            amount: 0,
-            date: new Date(),
-            description: ""
-        })
+    addTransaction = () => {
+        this.props.currentBudget.makeInput(this.props.generalStore.budgetItem)
+        this.props.generalStore.resetItem()
     }
 
     expense = () => {
-        const transaction = {
-            category: this.state.category,
-            amount: this.state.amount,
-            date: new Date(this.state.date),
-            description: this.state.description,
-            type: "expense"
-        }
-        this.props.makeInput(transaction)
-        this.resetInput()
+        this.props.generalStore.addItemType(true)
+        this.addTransaction()
     }
 
     income = () => {
-        const transaction = {
-            category: this.state.category,
-            amount: this.state.amount,
-            date: new Date(this.state.date),
-            description: this.state.description,
-            type: "income"
-        }
-        this.props.makeInput(transaction)
-        this.resetInput()
+        this.props.generalStore.addItemType(false)
+        this.addTransaction()
     }
 
     render(){
         return (<div id="main-add-container">
             <div className="add-inputs">
                 <div className="category"><input name="category" type="text" placeholder="Enter Category" 
-                    value={this.state.category} onChange={this.getInput} /></div>
+                    value={this.props.generalStore.budgetItem.category} onChange={this.getInput} /></div>
 
                 <div className="amount"><input name="amount" type="number" placeholder="Amount"
-                    value={this.state.amount} onChange={this.getInput} /></div>
+                    value={this.props.generalStore.budgetItem.amount} onChange={this.getInput} /></div>
 
                 <div className="date"><input name="date" type="date" placeholder="Date (leave blank to enter today's date)"
-                    value={this.state.date} onChange={this.getInput} /></div>
+                    value={this.props.generalStore.budgetItem.date} onChange={this.getInput} /></div>
 
                 <div className="description"><input name="description" type="text" placeholder="Enter description"
-                    value={this.state.description} onChange={this.getInput} /></div>
+                    value={this.props.generalStore.budgetItem.description} onChange={this.getInput} /></div>
 
                 <div className="add-buttons">
-                    <button className="expense-button" onClick={this.expense}>Expense</button>
-                    <button className="income-button" onClick={this.income}>Income</button>
+                    <button className="expense-button" onClick={this.expense}>Add an Expense</button>
+                    <button className="income-button" onClick={this.income}>Add an Income</button>
                 </div>
             </div>
-            <div className="transaction-summary">
-                <Transactions transactions={this.props.transactions}/>
-            </div>
+            <Transactions />
         </div>)
     }
 }

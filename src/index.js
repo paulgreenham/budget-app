@@ -1,12 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import * as serviceWorker from './serviceWorker'
+import { Budget } from './stores/Budget'
+import { AllBudgets } from './stores/AllBudgets'
+import { Provider } from 'mobx-react'
+import { GeneralStore } from './stores/GeneralStore';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const budgets = new AllBudgets()
+budgets.addBudget(new Budget(2019))
+const currentBudget = budgets.getBudget(2019)
+const generalStore = new GeneralStore()
+const stores = {generalStore, currentBudget}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+<Provider {...stores}>
+    <App />
+</Provider>, document.getElementById('root'))
+
+serviceWorker.unregister()

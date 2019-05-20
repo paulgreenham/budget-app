@@ -5,10 +5,6 @@ import '../style/home.css'
 
 class Home extends Component {
 
-  async componentDidMount() {
-    await this.props.updateTransactions()
-  }
-
   render() {
     return (<div id="main-container">
       <div id="content-container">
