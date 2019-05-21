@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 import Home from './components/Home'
-import AddBudgetItem from './components/AddBudgetItem'
+import AddBudgetItem from './components/AddItems/AddBudgetItem'
 import CheckBudget from './components/CheckBudget'
 import CreateBudget from './components/CreateBudget'
 
