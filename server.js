@@ -6,6 +6,7 @@ const api = require('./server/routes/api')
 
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/budgetDB', {useNewUrlParser: true})
+mongoose.set('useFindAndModify', false);
 
 
 const app = express()

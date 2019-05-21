@@ -18,13 +18,13 @@
     "a dt"
     "d d"
     "ab ab";
+    color: #8F0D17;
 }
 
 .add-input {
     display: grid;
     align-items: center;
     justify-items: left;
-    color: #8F0D17;
     font-weight: bolder;
     margin: 10px;
     margin-bottom: 40px;
