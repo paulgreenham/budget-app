@@ -3,6 +3,7 @@ import Transaction from './Transaction'
 import { observer, inject } from 'mobx-react'
 
 import '../style/spinner.css'
+import '../style/transactions.css'
 
 @inject("currentBudget")
 @observer
@@ -28,7 +29,8 @@ class Transactions extends Component {
 
     selectMonth = () => {
         return (
-            <div>Choose which month's transactions you wish to see:
+            <div className="selection-header">
+                <span className="selection-text">Choose which month's transactions you wish to see: </span>
                 <select name="selectMonth" id="month-selector" value={this.state.selectedMonth} onChange={this.changeMonth}>
                     <option value="0">January</option>
                     <option value="1">Feburary</option>
@@ -57,7 +59,9 @@ class Transactions extends Component {
             </div> :
             <div className="transaction-summary">
                 {this.selectMonth()}
-                {transactions.map(t => <Transaction key={t._id} transaction={t}/>)}
+                <div className="transactions-container">
+                    {transactions.map(t => <Transaction key={t._id} transaction={t}/>)}
+                </div>
             </div>}
         </React.Fragment>)
     }

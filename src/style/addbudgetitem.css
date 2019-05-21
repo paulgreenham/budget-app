@@ -2,26 +2,114 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     opacity: 0.9;
-}
-
-@media only screen and (max-width: 720px) {
-    #main-add-container {
-        display: grid;
-        grid-template-columns: 1fr;
-    }
+    background-color: #EC8B20;
 }
 
 .add-inputs {
-    background-color: #EC8B20;
+    width: 25vw;
+    height: 78vh;
     display: grid;
-    padding: 5vw;
+    grid-template-rows: repeat(4 1fr);
+    grid-template-columns: 1fr 1fr;
+    margin-top: 5vw;
+    margin-left: 12vw;
+    grid-template-areas:
+    "c c"
+    "a dt"
+    "d d"
+    "ab ab";
 }
 
-.transaction-summary {
-    background-color: #8F0D17;
-    color: #E1CDB5;
+.add-input {
+    display: grid;
+    align-items: center;
+    justify-items: left;
+    color: #8F0D17;
+    font-weight: bolder;
+    margin: 10px;
+    margin-bottom: 40px;
+    font-size: 24px;
 }
 
-.income-item {
-    background-color: #FD5C18;
+.add-input > input {
+    width: 300px;
+    height: 24px;
+    background-color: #EC8B20;
+    border: none;
+    border-bottom: 1px solid #8F0D17;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    margin-top: 10px;
+}
+
+.category {
+    grid-area: c;
+}
+
+.amount {
+    grid-area: a;
+}
+
+.amount > input {
+    width: 125px;
+}
+
+.date > input {
+    width: 175px;
+    font-size: 16px;
+}
+
+.date {
+    grid-area: dt;
+}
+
+.description {
+    grid-area: d;
+}
+
+.add-buttons {
+    grid-area: ab;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+}
+
+.add-buttons > button {
+    width: 150px;
+    height: 72px;
+    color: #8F0D17;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    background-color: #E1CDB5;
+    cursor: pointer;
+    outline: none;
+    margin: 2px;
+}
+
+.add-buttons > button:hover {
+    padding: 10px;
+    border: 2px inset #8F0D17;
+    cursor: pointer;
+  }
+
+
+  @media only screen and (max-width: 840px) {
+    #main-add-container {
+        grid-template-columns: 1fr;
+        overflow: scroll;
+    }
+    .add-inputs {
+        width: 100vw;
+        height: 100vh;
+    }
+    .add-input > input {
+        width: 120px;
+    }
+    .amount > input, .date > input {
+        width: 80px;
+    }
 }

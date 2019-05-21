@@ -11,6 +11,9 @@ class AddBudgetItem extends Component {
     getInput = event => this.props.generalStore.getInput(event.target.name, event.target.value)
 
     addTransaction = () => {
+        if (this.props.generalStore.isBudgetItemEmpty()) {
+            return alert("Please enter data in each field. (No date entry will give today's date.)")
+        }
         this.props.currentBudget.makeInput(this.props.generalStore.budgetItem)
         this.props.generalStore.resetItem()
     }
@@ -28,21 +31,33 @@ class AddBudgetItem extends Component {
     render(){
         return (<div id="main-add-container">
             <div className="add-inputs">
-                <div className="category"><input name="category" type="text" placeholder="Enter Category" 
-                    value={this.props.generalStore.budgetItem.category} onChange={this.getInput} /></div>
+                <div className="category add-input">
+                    <div>What category of transaction?</div>
+                    <input name="category" type="text" placeholder="Category" 
+                    value={this.props.generalStore.budgetItem.category} onChange={this.getInput} />
+                </div>
 
-                <div className="amount"><input name="amount" type="number" placeholder="Amount"
-                    value={this.props.generalStore.budgetItem.amount} onChange={this.getInput} /></div>
+                <div className="amount add-input">
+                    <div>How much?</div>
+                    <input name="amount" type="number" placeholder="Amount"
+                    value={this.props.generalStore.budgetItem.amount} onChange={this.getInput} />
+                </div>
 
-                <div className="date"><input name="date" type="date" placeholder="Date (leave blank to enter today's date)"
-                    value={this.props.generalStore.budgetItem.date} onChange={this.getInput} /></div>
+                <div className="date add-input">
+                    <div>When?</div>
+                    <input name="date" type="date"
+                    value={this.props.generalStore.budgetItem.date} onChange={this.getInput} />
+                </div>
 
-                <div className="description"><input name="description" type="text" placeholder="Enter description"
-                    value={this.props.generalStore.budgetItem.description} onChange={this.getInput} /></div>
+                <div className="description add-input">
+                    <div>Give some details:</div>
+                    <input name="description" type="text" placeholder="Enter description"
+                    value={this.props.generalStore.budgetItem.description} onChange={this.getInput} />
+                </div>
 
                 <div className="add-buttons">
-                    <button className="expense-button" onClick={this.expense}>Add an Expense</button>
-                    <button className="income-button" onClick={this.income}>Add an Income</button>
+                    <button className="expense-button" onClick={this.expense}>Add as an Expense</button>
+                    <button className="income-button" onClick={this.income}>Add as an Income</button>
                 </div>
             </div>
             <Transactions />
