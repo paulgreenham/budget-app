@@ -1,6 +1,6 @@
 .transaction-summary {
-    background-color: #8F0D17;
-    color: #E1CDB5;
+    background-color: var(--variation-three);
+    color: var(--primary-light);
     display: grid;
     grid-template-rows: 1fr 9fr;
 }
@@ -13,10 +13,10 @@
 
 #month-selector {
     width: 200px;
-    background-color: #8F0D17;
+    background-color: var(--variation-three);
     border: none;
-    border-bottom: 1px solid #E1CDB5;
-    color: #E1CDB5;
+    border-bottom: 1px solid var(--primary-light);
+    color: var(--primary-light);
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
@@ -34,8 +34,8 @@
 }
 
 .income {
-    background-color: #EC8B20;
-    color: #8F0D17;
+    background-color: var(--variation-one);
+    color: var(--variation-three);
 }
 
 .transaction {
@@ -46,7 +46,11 @@
     margin-left: 2vw;
     margin-right: 2vw;
     margin-bottom: 2vh;
-    border-bottom: 2px solid #E1CDB5;
+    border-bottom: 2px solid var(--primary-light);
+}
+
+.transaction:hover {
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 840px) {

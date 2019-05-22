@@ -11,7 +11,7 @@
     "a dt"
     "d d"
     "ab ab";
-    color: #8F0D17;
+    color: var(--variation-three);
 }
 
 .add-input {
@@ -27,9 +27,9 @@
 .add-input > input {
     width: 300px;
     height: 24px;
-    background-color: #EC8B20;
+    background-color: var(--variation-one);
     border: none;
-    border-bottom: 1px solid #8F0D17;
+    border-bottom: 1px solid var(--variation-three);
     color: inherit;
     font-family: inherit;
     font-size: inherit;
@@ -51,7 +51,7 @@
 
 .date > input {
     width: 175px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .date {
@@ -72,12 +72,12 @@
 .add-buttons > button {
     width: 150px;
     height: 72px;
-    color: #8F0D17;
+    color: var(--variation-three);
     font-family: inherit;
     font-weight: bold;
     font-size: 20px;
     border: none;
-    background-color: #E1CDB5;
+    background-color: var(--primary-light);
     cursor: pointer;
     outline: none;
     margin: 2px;
@@ -85,7 +85,7 @@
 
 .add-buttons > button:hover {
     padding: 10px;
-    border: 2px inset #8F0D17;
+    border: 2px inset var(--variation-three);
     cursor: pointer;
   }
 
