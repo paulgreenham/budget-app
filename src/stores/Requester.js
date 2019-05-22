@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const url = process.env.PORT ? "" : "http://localhost:3723"
+// const url = process.env.PORT ? "" : "http://localhost:3723"
+const url = ""
 
 export class Requester {
     getAllBudgetItems = async () => {
