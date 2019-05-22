@@ -1,5 +1,5 @@
-import React, { Component } from './node_modules/react'
-import { observer, inject } from './node_modules/mobx-react'
+import React, { Component } from 'react'
+import { observer, inject } from 'mobx-react'
 
 import '../../style/addbudgetitem.css'
 

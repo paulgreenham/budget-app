@@ -1,5 +1,5 @@
-import React, { Component } from './node_modules/react'
-import { inject, observer } from './node_modules/mobx-react'
+import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 
 import '../../style/editpopup.css'
 

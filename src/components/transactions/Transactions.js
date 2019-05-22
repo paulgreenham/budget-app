@@ -1,6 +1,6 @@
-import React, { Component } from './node_modules/react'
+import React, { Component } from 'react'
 import Transaction from './Transaction'
-import { observer, inject } from './node_modules/mobx-react'
+import { observer, inject } from 'mobx-react'
 
 import '../../style/spinner.css'
 import '../../style/transactions.css'
