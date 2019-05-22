@@ -1,6 +1,9 @@
 {
   "name": "money-logger",
   "version": "0.1.0",
+  "engines": {
+    "node" : "10.x"
+  },
   "private": true,
   "dependencies": {
     "@babel/core": "7.4.3",

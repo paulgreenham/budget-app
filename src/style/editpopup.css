@@ -1,0 +1,72 @@
+.edit-popup {
+    height: 200%;
+    width: 200%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+}
+
+.popup-details {
+    position: fixed;
+    margin: auto;
+    width: 25%;
+    height: 45%;
+    top: 30%;
+    left: 37%;
+    display: grid;
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 840px) {
+    .popup-details {
+        width: 50%;
+        height: 55%;
+        top: 25%;
+        left: 25%;
+    }
+}
+
+.close-button:hover {
+    cursor: pointer;
+}
+
+.edit-input {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    align-content: center;
+}
+
+.edit-input > span {
+    margin-right: 5px;
+
+}
+
+.edit-input > input {
+    background-color: var(--primary-dark);
+    border: none;
+    border-bottom: 2px solid var(--primary-light);
+    height: 24px;
+    color: var(--primary-light);
+    font-size: inherit;
+    font-family: inherit;
+    outline: none;
+    overflow: hidden;
+}
+
+.popup-details > button {
+    background-color: var(--variation-two);
+    color: var(--primary-dark);
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: 700;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+    margin-top: 10px;
+}
