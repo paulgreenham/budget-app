@@ -14,9 +14,9 @@ class Home extends Component {
         </div>
       </div>
       <div id="selections-container">
-        <Link to='/add' className="selection" id="add">Add budget item</Link>
+        <Link to='/modify' className="selection" id="add">Add or Change budget items</Link>
         <Link to='/check' className="selection" id="check">Check budget</Link>
-        <Link to='create' className="selection" id="create">Create new budget</Link>
+        <Link to='/create' className="selection" id="create">Create new budget</Link>
       </div>
     </div>)
   }

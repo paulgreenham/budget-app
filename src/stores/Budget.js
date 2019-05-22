@@ -17,7 +17,7 @@ export class Budget {
         this.getTransactionsByMonth()
     }
 
-    @action makeInput = async transaction => {
+    @action postTransaction = async transaction => {
         await requester.postBudgetItem(transaction)
         this.updateTransactions()
     }
@@ -26,6 +26,11 @@ export class Budget {
         let updated = await requester.editBudgetItem(transaction)
         this.updateTransactions()
         return updated
+    }
+
+    @action deleteTransaction = async id => {
+        await requester.deleteBudgetItem(id)
+        this.updateTransactions()
     }
 
     @action changeMonth = month => {

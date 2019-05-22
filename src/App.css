@@ -32,15 +32,28 @@
   cursor: pointer;
 }
 
+#modify-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  opacity: 0.9;
+  background-color: #EC8B20;
+}
+
+@media only screen and (max-width: 840px) {
+  #modify-container {
+    grid-template-columns: 1fr;
+    overflow: scroll;
+  }
+}
 
 @media only screen and (max-width: 360px) {
   .App {
-    height: 116vh;
+    height: 122vh;
   }
 }
 
 @media only screen and (max-width: 320px) {
   .App {
-    height: 125vh;
+    height: 132vh;
   }
 }

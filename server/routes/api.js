@@ -74,4 +74,10 @@ router.put('/transaction', async function (req, res) {
     res.send(updated)
 })
 
+router.delete('/transaction/:id', async function (req, res) {
+    let id = req.params.id
+    await Expense.findByIdAndDelete(id)
+    res.end()
+})
+
 module.exports = router

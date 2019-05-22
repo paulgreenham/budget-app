@@ -42,7 +42,7 @@ export class GeneralStore {
 
     @action isBudgetItemEmpty = () => {
         for (let key of Object.keys(this.budgetItem)) {
-            if (this.budgetItem[key] === "" || this.budgetItem[key] === 0) {
+            if (this.budgetItem[key] === "") {
                 return true
             }
         }
