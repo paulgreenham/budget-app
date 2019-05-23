@@ -6,6 +6,7 @@ const moment = require('moment')
 const Expense = require('../models/Expense')
 
 router.get('/transactions', function (req, res) {
+    console.log("hey server this is paul")
     if(req.query.d1) {
     let startDate = moment(req.query.d1, "YYYY-MM-DD").format("LLLL")
         if(req.query.d2) {
