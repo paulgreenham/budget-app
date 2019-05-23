@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-const url = process.env.PROD ? "" : "http://localhost:3723"
-// const url = ""
+// const url = process.env.PROD ? "" : "http://localhost:3723"
+const url = ""
 
 export class Requester {
     getAllBudgetItems = async () => {
-        let itemsFromDB = await axios.get(`${url}/transactions`)
+        let itemsFromDB = await axios.get(`/transactions`)
         return itemsFromDB.data
     }
 

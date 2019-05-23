@@ -13,7 +13,7 @@ const app = express()
 app.use(express.static(path.join(__dirname, 'build')))
 app.use(express.static(path.join(__dirname, 'node_modules')))
 app.use(function (req, res, next) {
-    if (process.env.PORT) { return }
+    if (process.env.PROD) { return }
     else {
         res.header('Access-Control-Allow-Origin', '*')
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
