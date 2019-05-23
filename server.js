@@ -11,7 +11,7 @@ mongoose.set('useFindAndModify', false)
 
 const app = express()
 app.use(express.static(path.join(__dirname, 'build')))
-app.use(express.static(path.join(__dirname, 'node_modules')))
+// app.use(express.static(path.join(__dirname, 'node_modules')))
 // app.use(function (req, res, next) {
 //     if (!process.env.PROD) {
 //         res.header('Access-Control-Allow-Origin', '*')
