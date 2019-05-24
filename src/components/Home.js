@@ -10,7 +10,7 @@ class Home extends Component {
       <div id="content-container">
         <div id="main-content">
           <h1>Money Logger</h1>
-          <p>What would you like to do today?</p>
+          <p>"I was spending money the way it likes to rain" -Ryan Adams</p>
         </div>
       </div>
       <div id="selections-container">
