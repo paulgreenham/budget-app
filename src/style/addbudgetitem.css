@@ -97,9 +97,12 @@
         overflow: scroll;
     }
     .add-input > input {
-        width: 120px;
+        width: 300px;
     }
-    .amount > input, .date > input {
-        width: 80px;
+    .amount > input {
+        width: 100px;
+    }
+    .date > input {
+        width: 180px;
     }
 }
