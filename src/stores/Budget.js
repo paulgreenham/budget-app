@@ -9,7 +9,8 @@ export class Budget {
     @observable transactions = []
     @observable currentMonthTransactions = []
     @observable categories = []
-    @observable budgetByCategory = {}
+    @observable spendingByCategory = {}
+    @observable budget = {}
 
     @action updateTransactions = async () => {
         let transactions = await requester.getAllBudgetItems()
@@ -43,10 +44,41 @@ export class Budget {
     }
 
     @action getSpendingByCategory = () => {
-        //return object with current expenditure totals in each category
+        this.setSpendingCategories()
+        for(let item of this.transactions) {
+            if(this.excludeType(item, "income")) { continue }
+            this.spendingByCategory[item.category] += Number(item.amount)
+        }        
+    }
+
+    @action updateCategories = async () => {
+        await this.updateTransactions()
+        this.getCurrentBudget()     //later will also be await for DB query
+        this.getSpendingByCategory()
     }
 
     constructor(year) {
         this.year = year
+    }
+
+    getCurrentBudget = () => {  //this will eventually pull from the user's previous input in the database, for now it generates the object from the transactions
+        for(let item of this.transactions) {
+            if(this.budget[item.category]) { continue }
+            else {
+                this.budget[item.category] = {
+                    type: item.type,
+                    amount: 0
+                }
+            }
+        }
+    }
+
+    excludeType = (transaction, type) => transaction.type === type
+
+    setSpendingCategories = () => {
+        for(let category of Object.keys(this.budget)) {
+            if(this.excludeType(this.budget[category], "income")) { continue }
+            this.spendingByCategory[category] = 0
+        }
     }
 }

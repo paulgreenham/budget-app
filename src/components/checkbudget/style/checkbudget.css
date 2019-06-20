@@ -12,3 +12,11 @@
 .main-analytics-container {
 
 }
+
+.charts-by-category {
+    background-color: var(--variation-one);
+    width: 60vw;
+    height: 40vh;
+    margin: 20px;
+    color: var(--primary-dark);
+}
