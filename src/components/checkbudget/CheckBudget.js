@@ -3,9 +3,12 @@ import './style/checkbudget.css'
 
 class CheckBudget extends Component {
     render(){
-        return (<div className="main-analytics-container">
+        return (<React.Fragment>
+        <div className="main-analytics-container">
             Check Budget
-        </div>)
+        </div>
+        <div className="analytics-background"></div>
+        </React.Fragment>)
     }
 }
 
