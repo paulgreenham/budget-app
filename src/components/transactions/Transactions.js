@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Transaction from './Transaction'
 import { observer, inject } from 'mobx-react'
 
-import '../../style/spinner.css'
-import '../../style/transactions.css'
+import '../../globalstyle/spinner.css'
+import './style/transactions.css'
 
 @inject("currentBudget")
 @observer
