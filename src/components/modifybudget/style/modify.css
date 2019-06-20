@@ -1,0 +1,14 @@
+
+#modify-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    opacity: 0.9;
+    background-color: var(--variation-one);
+  }
+  
+  @media only screen and (max-width: 840px) {
+    #modify-container {
+      grid-template-columns: 1fr;
+      overflow: scroll;
+    }
+  }

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import AddBudgetItem from './AddBudgetItem'
 import Transactions from './Transactions'
 
+import './style/modify.css'
+
 
 class Modify extends Component {
     render(){
