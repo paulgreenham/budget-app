@@ -7,9 +7,9 @@ export class Budget {
     @observable year = ""
     @observable currentMonth = new Date().getMonth()
     @observable transactions = []
-    @observable spendingByCategory = {}
+    // @observable spendingByCategory = {}
     @observable currentMonthTransactions = []
-    @observable currentMonthSpending = {}
+    // @observable currentMonthSpending = {}
     @observable budget = {}
 
     @action updateTransactions = async () => {
@@ -45,10 +45,9 @@ export class Budget {
 
     @action getSpendingByCategory = (type = "expense", period = "ytd") => {
         let transactions = this.transactions
-        let spending = this.spendingByCategory
+        let spending = {}
         if (period !== "ytd") {
             transactions = this.currentMonthTransactions
-            spending = this.currentMonthSpending
         }
         this.setSpendingCategories(spending, type)
         for(let item of transactions) {
@@ -56,17 +55,14 @@ export class Budget {
                 spending[item.category] += Number(item.amount)
             }
             else { continue }
-        }        
+        }
+        return spending
     }
 
     @action updateCategories = async () => {
         await this.updateTransactions()
         this.getCurrentBudget()     //later will also be an await for DB query
-        this.getSpendingByCategory()
-    }
-
-    @action getSpendingByMonth = month => {
-
+        // this.getSpendingByCategory()
     }
 
     constructor(year) {

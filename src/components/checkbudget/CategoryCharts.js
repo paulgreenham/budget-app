@@ -13,22 +13,22 @@ class CategoryCharts extends Component {
             currentMonth: new Date().getMonth(),
             period: "ytd",
             type: "expense",
-            // spending: {},
             titleType: "Expenses",
-            titlePeriod: "Year-to-Date"
+            titlePeriod: "Year-to-Date",
+            spending: {}
         }
     }
 
-    updateState = () => {
+    updateGeneralState = () => {
         this.props.currentBudget.changeMonth(this.state.currentMonth)
-        this.props.currentBudget.getSpendingByCategory(this.state.type, this.state.period)
+        this.setState({ spending: this.props.currentBudget.getSpendingByCategory(this.state.type, this.state.period) })
     }
 
     handlePeriodInput = event => {
         this.setState({
             period: event.target.value,
             titlePeriod: event.target.value === "ytd" ? "Year-to-Date" : this.getMonth(this.state.currentMonth) 
-        }, function() { this.updateState() })
+        }, function() { this.updateGeneralState() })
     }
 
     handleMonthInput = event => {
@@ -36,14 +36,14 @@ class CategoryCharts extends Component {
         this.setState({
             currentMonth: month,
             titlePeriod: this.getMonth(month)
-        }, function() { this.updateState() })
+        }, function() { this.updateGeneralState() })
     }
 
     handleTypeInput = event => {
         this.setState({
             type: event.target.value,
             titleType: event.target.value === "expense" ? "Expenses" : "Income" 
-        })
+        }, function() { this.updateGeneralState() })
     }
 
     renderPeriodMenu = () => {
@@ -79,14 +79,14 @@ class CategoryCharts extends Component {
 
     getMonth = month => new Date(2019, month).toDateString().slice(4, 7)
 
-    getSpending = () => {
-        if (this.state.period === "ytd") {
-            return this.props.currentBudget.spendingByCategory
-        }
-        else {
-            return this.props.currentBudget.currentMonthSpending
-        }
-    }
+    // getSpending = () => {
+    //     if (this.state.period === "ytd") {
+    //         return this.props.currentBudget.getspendingByCategory
+    //     }
+    //     else {
+    //         return this.props.currentBudget.currentMonthSpending
+    //     }
+    // }
 
     getDataObject = (l, a) => {
         return {
@@ -112,8 +112,11 @@ class CategoryCharts extends Component {
         )
     }
 
+    componentDidMount() {
+        this.updateGeneralState()
+    }
+
     render(){
-        const spending = this.getSpending()
         return (<div>
             <div className="charts-by-category">
                 <div className="spending-menu">
@@ -123,7 +126,7 @@ class CategoryCharts extends Component {
                     <div><span className="type-selection">Select Type: </span>{this.renderTypeMenu()}</div>
                 </div>
                 <div>{this.state.titleType}: {this.state.titlePeriod}</div>
-                {this.renderChart(this.getDataObjects(spending))}
+                {this.renderChart(this.getDataObjects(this.state.spending))}
             </div>
         </div>)
     }
