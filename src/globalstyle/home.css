@@ -41,6 +41,8 @@
     background-color: var(--variation-one);
     opacity: .75;
     color: var(--primary-dark);
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .selection {

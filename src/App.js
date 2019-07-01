@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 import Home from './components/Home'
-import Modify from './components/transactions/Modify'
-import CheckBudget from './components/CheckBudget'
-import CreateBudget from './components/CreateBudget'
+import Modify from './components/modifybudget/Modify'
+import CheckBudget from './components/checkbudget/CheckBudget'
+import CreateBudget from './components/createbudget/CreateBudget'
 
 import './App.css'
 

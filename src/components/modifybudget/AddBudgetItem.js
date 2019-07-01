@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 
-import '../../style/addbudgetitem.css'
+import './style/addbudgetitem.css'
 
 @inject("generalStore", "currentBudget")
 @observer

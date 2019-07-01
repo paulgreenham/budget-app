@@ -1,0 +1,29 @@
+.analytics-background {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--variation-two);
+    opacity: .5;    
+    position: absolute;
+    top: 0;
+    left:0;
+    z-index: -1;
+}
+
+.main-analytics-container {
+    display: grid;
+    justify-items: center;
+}
+
+.charts-by-category {
+    background-color: var(--primary-light);
+    width: 80vw;
+    height: 60vh;
+    margin: 20px;
+    color: var(--primary-dark);
+    padding: 10px;
+}
+
+.spending-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr)
+}

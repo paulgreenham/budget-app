@@ -8,8 +8,7 @@ export class Budget {
     @observable currentMonth = new Date().getMonth()
     @observable transactions = []
     @observable currentMonthTransactions = []
-    @observable categories = []
-    @observable budgetByCategory = {}
+    @observable budget = {}
 
     @action updateTransactions = async () => {
         let transactions = await requester.getAllBudgetItems()
@@ -42,11 +41,48 @@ export class Budget {
         this.currentMonthTransactions = this.transactions.filter(t => new Date(t.date).getMonth() === this.currentMonth)
     }
 
-    @action getSpendingByCategory = () => {
-        //return object with current expenditure totals in each category
+    @action getSpendingByCategory = (type = "expense", period = "ytd") => {
+        let transactions = period === "ytd" ? this.transactions : this.currentMonthTransactions
+        let spending = {}
+        this.setSpendingCategories(spending, type)
+        for(let item of transactions) {
+            if(this.includeType(item, type)) {
+                spending[item.category] += Number(item.amount)
+            }
+            else { continue }
+        }
+        return spending
+    }
+
+    @action updateCategories = async () => {
+        await this.updateTransactions()
+        this.getCurrentBudget()     //later will also be an await for DB query
     }
 
     constructor(year) {
         this.year = year
+    }
+
+    getCurrentBudget = () => {  //this will eventually pull from the user's previous input in the database, for now it generates the object from the transactions
+        for(let item of this.transactions) {
+            if(this.budget[item.category]) { continue }
+            else {
+                this.budget[item.category] = {
+                    type: item.type,
+                    amount: 0
+                }
+            }
+        }
+    }
+
+    includeType = (transaction, type) => transaction.type === type
+
+    setSpendingCategories = (spending, type) => {
+        for(let category of Object.keys(this.budget)) {
+            if(this.includeType(this.budget[category], type)) {
+                spending[category] = 0
+            }
+            else { continue }
+        }
     }
 }
