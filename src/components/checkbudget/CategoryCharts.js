@@ -13,26 +13,48 @@ class CategoryCharts extends Component {
             currentMonth: new Date().getMonth(),
             period: "ytd",
             type: "expense",
-            spending: {},
-            chartTitle: "Expenses, Year-to-Date"
+            // spending: {},
+            titleType: "Expenses",
+            titlePeriod: "Year-to-Date"
         }
     }
 
-    handleInput = event => {
+    handlePeriodInput = event => {
         this.setState({
-            [event.target.name]: event.target.value
+            period: event.target.value,
+            titlePeriod: event.target.value === "ytd" ? "Year-to-Date" : this.getMonth(this.state.currentMonth) 
+        }, function() {
+            this.props.currentBudget.getSpendingByCategory(this.state.type)
+        })
+    }
+
+    handleMonthInput = event => {
+        let month = Number(event.target.value)
+        this.setState({
+            currentMonth: month,
+            titlePeriod: this.getMonth(month)
+        }, function() {
+            this.props.currentBudget.changeMonth(month)
+            this.props.currentBudget.getSpendingByCategory(this.state.type, this.state.period)
+        })
+    }
+
+    handleTypeInput = event => {
+        this.setState({
+            type: event.target.value,
+            titleType: event.target.value === "expense" ? "Expenses" : "Income" 
         })
     }
 
     renderPeriodMenu = () => {
-        return(<select className="period-menu" name="period" value={this.state.period} onChange={this.handleInput}>
+        return(<select className="period-menu" name="period" value={this.state.period} onChange={this.handlePeriodInput}>
             <option defaultValue={true} value="ytd">Year to Date</option>
             <option value="byMonth">By Month</option>
         </select>)
     }
 
     renderMonthMenu = () => {
-        return(<select className="month-menu" name="currentMonth" value={this.state.currentMonth} onChange={this.handleInput}>
+        return(<select className="month-menu" name="currentMonth" value={this.state.currentMonth} onChange={this.handleMonthInput}>
             <option value="0">January</option>
             <option value="1">Feburary</option>
             <option value="2">March</option>
@@ -49,7 +71,7 @@ class CategoryCharts extends Component {
     }
 
     renderTypeMenu = () => {
-        return(<select className="type-menu" name="type" value={this.state.type} onChange={this.handleInput}>
+        return(<select className="type-menu" name="type" value={this.state.type} onChange={this.handleTypeInput}>
             <option defaultValue={true} value="expense">Expenses</option>
             <option value="income">Income</option>
         </select>)
@@ -59,14 +81,9 @@ class CategoryCharts extends Component {
 
     getSpending = () => {
         if (this.state.period === "ytd") {
-            this.props.currentBudget.getSpendingByCategory(this.state.type)
-            this.setState({ chartTitle: `${this.state.type === "expense" ? "Expenses" : "Income"}: Year-to-Date`})
             return this.props.currentBudget.spendingByCategory
         }
         else {
-            this.props.currentBudget.changeMonth(this.state.currentMonth)
-            this.props.currentBudget.getSpendingByCategory(this.state.type, this.state.period)
-            this.setState({ chartTitle: `${this.state.type === "expense" ? "Expenses" : "Income"}: ${this.getMonth()}`})
             return this.props.currentBudget.currentMonthSpending
         }
     }
@@ -95,13 +112,8 @@ class CategoryCharts extends Component {
         )
     }
 
-    componentDidMount() {
-        this.setState({
-            spending: this.getSpending()
-        })
-    }
-
     render(){
+        const spending = this.getSpending()
         return (<div>
             <div className="charts-by-category">
                 <div className="spending-menu">
@@ -110,8 +122,8 @@ class CategoryCharts extends Component {
                         <div><span className="month-selection">Select Month: </span>{this.renderMonthMenu()}</div>}
                     <div><span className="type-selection">Select Type: </span>{this.renderTypeMenu()}</div>
                 </div>
-                <div>{this.state.chartTitle}</div>
-                {this.renderChart(this.getDataObjects(this.state.spending))}
+                <div>{this.state.titleType}: {this.state.titlePeriod}</div>
+                {this.renderChart(this.getDataObjects(spending))}
             </div>
         </div>)
     }

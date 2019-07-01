@@ -10,7 +10,6 @@ export class Budget {
     @observable spendingByCategory = {}
     @observable currentMonthTransactions = []
     @observable currentMonthSpending = {}
-    // @observable categories = []
     @observable budget = {}
 
     @action updateTransactions = async () => {
@@ -38,7 +37,6 @@ export class Budget {
     @action changeMonth = month => {
         this.currentMonth = month
         this.getTransactionsByMonth()
-        // this.getSpendingByCategory(this.currentMonthTransactions, this.currentMonthSpending)
     }
 
     @action getTransactionsByMonth = () => {
