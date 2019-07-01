@@ -1,6 +1,6 @@
 .analytics-background {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: var(--variation-two);
     opacity: .5;    
     position: absolute;
@@ -10,13 +10,20 @@
 }
 
 .main-analytics-container {
-
+    display: grid;
+    justify-items: center;
 }
 
 .charts-by-category {
     background-color: var(--primary-light);
-    width: 60vw;
-    height: 40vh;
+    width: 80vw;
+    height: 60vh;
     margin: 20px;
     color: var(--primary-dark);
+    padding: 10px;
+}
+
+.spending-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr)
 }

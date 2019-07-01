@@ -79,15 +79,6 @@ class CategoryCharts extends Component {
 
     getMonth = month => new Date(2019, month).toDateString().slice(4, 7)
 
-    // getSpending = () => {
-    //     if (this.state.period === "ytd") {
-    //         return this.props.currentBudget.getspendingByCategory
-    //     }
-    //     else {
-    //         return this.props.currentBudget.currentMonthSpending
-    //     }
-    // }
-
     getDataObject = (l, a) => {
         return {
             category: l,
@@ -120,10 +111,10 @@ class CategoryCharts extends Component {
         return (<div>
             <div className="charts-by-category">
                 <div className="spending-menu">
-                    <div><span className="period-selection">Select Period: </span>{this.renderPeriodMenu()}</div>
+                    <span><span className="period-selection">Select Period: </span>{this.renderPeriodMenu()}</span>
                     {this.state.period === "ytd" ? null : 
-                        <div><span className="month-selection">Select Month: </span>{this.renderMonthMenu()}</div>}
-                    <div><span className="type-selection">Select Type: </span>{this.renderTypeMenu()}</div>
+                        <span><span className="month-selection">Select Month: </span>{this.renderMonthMenu()}</span>}
+                    <span><span className="type-selection">Select Type: </span>{this.renderTypeMenu()}</span>
                 </div>
                 <div>{this.state.titleType}: {this.state.titlePeriod}</div>
                 {this.renderChart(this.getDataObjects(this.state.spending))}
