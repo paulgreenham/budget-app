@@ -19,13 +19,16 @@ class CategoryCharts extends Component {
         }
     }
 
+    updateState = () => {
+        this.props.currentBudget.changeMonth(this.state.currentMonth)
+        this.props.currentBudget.getSpendingByCategory(this.state.type, this.state.period)
+    }
+
     handlePeriodInput = event => {
         this.setState({
             period: event.target.value,
             titlePeriod: event.target.value === "ytd" ? "Year-to-Date" : this.getMonth(this.state.currentMonth) 
-        }, function() {
-            this.props.currentBudget.getSpendingByCategory(this.state.type)
-        })
+        }, function() { this.updateState() })
     }
 
     handleMonthInput = event => {
@@ -33,10 +36,7 @@ class CategoryCharts extends Component {
         this.setState({
             currentMonth: month,
             titlePeriod: this.getMonth(month)
-        }, function() {
-            this.props.currentBudget.changeMonth(month)
-            this.props.currentBudget.getSpendingByCategory(this.state.type, this.state.period)
-        })
+        }, function() { this.updateState() })
     }
 
     handleTypeInput = event => {
