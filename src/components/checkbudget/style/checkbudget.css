@@ -14,7 +14,7 @@
 }
 
 .charts-by-category {
-    background-color: var(--variation-one);
+    background-color: var(--primary-light);
     width: 60vw;
     height: 40vh;
     margin: 20px;

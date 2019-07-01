@@ -7,9 +7,10 @@ export class Budget {
     @observable year = ""
     @observable currentMonth = new Date().getMonth()
     @observable transactions = []
-    @observable currentMonthTransactions = []
-    @observable categories = []
     @observable spendingByCategory = {}
+    @observable currentMonthTransactions = []
+    @observable currentMonthSpending = {}
+    // @observable categories = []
     @observable budget = {}
 
     @action updateTransactions = async () => {
@@ -37,24 +38,37 @@ export class Budget {
     @action changeMonth = month => {
         this.currentMonth = month
         this.getTransactionsByMonth()
+        // this.getSpendingByCategory(this.currentMonthTransactions, this.currentMonthSpending)
     }
 
     @action getTransactionsByMonth = () => {
         this.currentMonthTransactions = this.transactions.filter(t => new Date(t.date).getMonth() === this.currentMonth)
     }
 
-    @action getSpendingByCategory = () => {
-        this.setSpendingCategories()
-        for(let item of this.transactions) {
-            if(this.excludeType(item, "income")) { continue }
-            this.spendingByCategory[item.category] += Number(item.amount)
+    @action getSpendingByCategory = (type = "expense", period = "ytd") => {
+        let transactions = this.transactions
+        let spending = this.spendingByCategory
+        if (period !== "ytd") {
+            transactions = this.currentMonthTransactions
+            spending = this.currentMonthSpending
+        }
+        this.setSpendingCategories(spending, type)
+        for(let item of transactions) {
+            if(this.includeType(item, type)) {
+                spending[item.category] += Number(item.amount)
+            }
+            else { continue }
         }        
     }
 
     @action updateCategories = async () => {
         await this.updateTransactions()
-        this.getCurrentBudget()     //later will also be await for DB query
+        this.getCurrentBudget()     //later will also be an await for DB query
         this.getSpendingByCategory()
+    }
+
+    @action getSpendingByMonth = month => {
+
     }
 
     constructor(year) {
@@ -73,12 +87,14 @@ export class Budget {
         }
     }
 
-    excludeType = (transaction, type) => transaction.type === type
+    includeType = (transaction, type) => transaction.type === type
 
-    setSpendingCategories = () => {
+    setSpendingCategories = (spending, type) => {
         for(let category of Object.keys(this.budget)) {
-            if(this.excludeType(this.budget[category], "income")) { continue }
-            this.spendingByCategory[category] = 0
+            if(this.includeType(this.budget[category], type)) {
+                spending[category] = 0
+            }
+            else { continue }
         }
     }
 }
